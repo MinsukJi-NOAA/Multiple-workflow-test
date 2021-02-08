@@ -1,0 +1,39 @@
+name: Build and test
+
+on:
+  push:
+    branches:
+      - Multiple-workflow-test
+  pull_request:
+    branches:
+      - Multiple-workflow-test
+
+jobs:
+  job1:
+    name: Set up
+    runs-on: ubuntu-20.04
+
+    steps:
+      - name: Do things to set up
+        run: echo "Set up complete!"
+
+  job2:
+    name: Build
+    runs-on: ubuntu-20.04
+
+    steps:
+      - name: Do things to build
+        run: |
+          sleep 60
+          cat ${GITHUB_EVENT_PATH}
+          echo "Build complete!"
+    
+  job3:
+    name: Test
+    runs-on: ubuntu-20.04
+
+    steps:
+      - name: Do things to test
+        run: |
+          sleep 60
+          echo "Test complete!"

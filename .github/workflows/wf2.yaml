@@ -1,0 +1,21 @@
+name: Start runners
+
+on:
+  workflow_run:
+    workflows: ["Build and test"]
+    types:
+      - requested
+
+jobs:
+  job1:
+    name: Check the status of build and start runners
+    runs-on: ubuntu-20.04
+
+    steps:
+      - name: Check the status of build
+        run: |
+          repo="${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/actions/runs"
+          cat ${GITHUB_EVENT_PATH}
+
+      - name: Start virtual machines
+        run: echo "Started the runners!"
