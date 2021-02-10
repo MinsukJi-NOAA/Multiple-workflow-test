@@ -19,7 +19,8 @@ jobs:
         run: |
           cd ${GITHUB_WORKSPACE}
           #conclusion=$(cat ${GITHUB_EVENT_PATH} | ./json_helper.py)
-          cat ${GITHUB_EVENT_PATH} | ./json_helper.py
+          cat ${GITHUB_EVENT_PATH} | ./json_helper.py >output 2>&1 &
+          tail -f output
           #if [[ $conclusion == "success" ]]; then
           #  echo "Start virtual machines!"
           #else
