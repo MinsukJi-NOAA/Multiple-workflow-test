@@ -39,7 +39,7 @@ def main():
   for i in indices:
     if data["jobs"][i]["conclusion"] == "success":
       no_successful_jobs += 1
-  print("number of successful jobs is", no_successful_jobs
+  print("number of successful jobs is", no_successful_jobs)
 
   if no_successful_jobs == len(indices):
     conclusion = "success"
