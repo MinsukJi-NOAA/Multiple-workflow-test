@@ -12,10 +12,19 @@ jobs:
     runs-on: ubuntu-20.04
 
     steps:
-      - name: Check the status of build
-        run: |
-          repo="${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/actions/runs"
-          cat ${GITHUB_EVENT_PATH}
+      - name: Check out codes
+        uses: actions/checkout@v2
 
-      - name: Start virtual machines
-        run: echo "Started the runners!"
+      - name: Check the status of build and start VMs
+        run: |
+          cd ${GITHUB_WORKSPACE}
+          conclusion=$(cat ${GITHUB_EVENT_PATH} | ./json_helper.py)
+          if [[ $conclusion == "success" ]]; then
+            echo "Start virtual machines!"
+          else
+            echo "Cannot start virtual machines!"
+          fi
+
+#      - name: Start virtual machines
+#        run: |
+#          echo "Started the runners!"
