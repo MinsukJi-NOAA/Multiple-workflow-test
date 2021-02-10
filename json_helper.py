@@ -20,12 +20,12 @@ def update_url_data(response):
   return data, indices
 
 def main():
-  url = json.load(sys.stdin)["workflow_run"]["jobs_url"]
-  response = urlopen(url)
 
   status="not-completed"
   no_completed_jobs = 0
   while status != "completed":
+    url = json.load(sys.stdin)["workflow_run"]["jobs_url"]
+    response = urlopen(url)
     data, indices = update_url_data(response)
 
     for i in indices:
