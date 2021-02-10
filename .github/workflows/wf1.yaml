@@ -21,15 +21,21 @@ jobs:
     name: Build
     runs-on: ubuntu-20.04
 
+    strategy:
+      fail-fast: false
+      matrix:
+        bld_no: [1, 2, 3]
+
     steps:
       - name: Do things to build
         run: |
           sleep 60
           cat ${GITHUB_EVENT_PATH}
-          echo "Build complete!"
+          echo "Build ${{ matrix.bld_no }} complete!"
     
   job3:
     name: Test
+    needs: job2
     runs-on: ubuntu-20.04
 
     steps:
