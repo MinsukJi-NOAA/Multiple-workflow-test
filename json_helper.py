@@ -36,10 +36,10 @@ def main():
 
     if no_completed_jobs == len(indices):
       status = "completed"
-      print("status is", status)
+      #print("status is", status)
     else:
       no_completed_jobs = 0
-      print("number of completed jobs is", no_completed_jobs)
+      #print("number of completed jobs is", no_completed_jobs)
       time.sleep(5)
 
   time.sleep(5)
@@ -48,13 +48,13 @@ def main():
   for i in indices:
     if data["jobs"][i]["conclusion"] == "success":
       no_successful_jobs += 1
-  print("number of successful jobs is", no_successful_jobs)
+  #print("number of successful jobs is", no_successful_jobs)
 
   if no_successful_jobs == len(indices):
     conclusion = "success"
 
-  print("conclusion is", conclusion)
-  #print(conclusion)
+  #print("conclusion is", conclusion)
+  print(conclusion)
   #print("status of", data["jobs"][i]["name"],"is", data["jobs"][i]["status"])
   #print("conclusion of", data["jobs"][i]["name"],"is", data["jobs"][i]["conclusion"])
   #print("**********************")
