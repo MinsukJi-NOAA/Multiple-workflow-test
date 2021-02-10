@@ -18,14 +18,12 @@ jobs:
       - name: Check the status of build and start VMs
         run: |
           cd ${GITHUB_WORKSPACE}
-          #conclusion=$(cat ${GITHUB_EVENT_PATH} | ./json_helper.py)
-          cat ${GITHUB_EVENT_PATH} | ./json_helper.py >output 2>&1 &
-          tail -f output
-          #if [[ $conclusion == "success" ]]; then
-          #  echo "Start virtual machines!"
-          #else
-          #  echo "Cannot start virtual machines!"
-          #fi
+          conclusion=$(cat ${GITHUB_EVENT_PATH} | ./json_helper.py)
+          if [[ $conclusion == "success" ]]; then
+            echo "Start virtual machines!"
+          else
+            echo "Cannot start virtual machines!"
+          fi
 
 #      - name: Start virtual machines
 #        run: |

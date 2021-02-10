@@ -7,9 +7,7 @@ import json
 import time
 from urllib.request import urlopen
 
-def main():
-  url = json.load(sys.stdin)["workflow_run"]["jobs_url"]
-  response = urlopen(url)
+def update_url_data(response):
   data = json.loads(response.read().decode())
   indices=[]
   for n in range(data["total_count"]):
@@ -19,9 +17,17 @@ def main():
   if len(indices) == 0:
     sys.exit(1)
 
+  return data, indices
+
+def main():
+  url = json.load(sys.stdin)["workflow_run"]["jobs_url"]
+  response = urlopen(url)
+
   status="not-completed"
   no_completed_jobs = 0
   while status != "completed":
+    data, indices = update_url_data(response)
+
     for i in indices:
       if data["jobs"][i]["status"] == "completed":
         no_completed_jobs += 1
@@ -34,6 +40,7 @@ def main():
       print("number of completed jobs is", no_completed_jobs)
       time.sleep(5)
 
+  time.sleep(5)
   conclusion="failure"
   no_successful_jobs = 0
   for i in indices:
